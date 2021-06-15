@@ -1,5 +1,6 @@
 import folium
 from django.shortcuts import render
+from django.http import Http404
 from pokemon_entities.models import Pokemon, PokemonEntity
 
 
@@ -50,7 +51,10 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    pokemon = Pokemon.objects.get(id=pokemon_id)
+    try:
+        pokemon = Pokemon.objects.get(id=pokemon_id)
+    except Pokemon.DoesNotExist:
+        raise Http404('Увы, покемон не найден!')
     previous_evolution = pokemon.previous_evolution
     next_evolution = pokemon.evolutions.all()
 
