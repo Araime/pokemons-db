@@ -56,16 +56,16 @@ def show_pokemon(request, pokemon_id):
 
     if previous_evolution:
         previous_evolution = {
-            "title_ru": previous_evolution.title_ru,
-            "pokemon_id": previous_evolution.id,
-            "img_url": previous_evolution.image.url
+            'title_ru': previous_evolution.title_ru,
+            'pokemon_id': previous_evolution.id,
+            'img_url': previous_evolution.image.url
         }
 
     if next_evolution:
         next_evolution = {
-            "title_ru": next_evolution[0].title_ru,
-            "pokemon_id": next_evolution[0].id,
-            "img_url": next_evolution[0].image.url
+            'title_ru': next_evolution[0].title_ru,
+            'pokemon_id': next_evolution[0].id,
+            'img_url': next_evolution[0].image.url
         }
 
     pokemon_info = {
