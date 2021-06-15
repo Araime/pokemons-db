@@ -12,14 +12,14 @@ DEFAULT_IMAGE_URL = (
 )
 
 
-def add_pokemon(folium_map, lat, lon, name, image_url=DEFAULT_IMAGE_URL):
+def add_pokemon(folium_map, lat, lon, image_url=DEFAULT_IMAGE_URL, pokemon_info=''):
     icon = folium.features.CustomIcon(
         image_url,
         icon_size=(50, 50),
     )
     folium.Marker(
         [lat, lon],
-        tooltip=name,
+        popup=pokemon_info,
         icon=icon,
     ).add_to(folium_map)
 
@@ -29,10 +29,11 @@ def show_all_pokemons(request):
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in pokemon_entities:
         add_pokemon(
-            folium_map, pokemon_entity.lat,
+            folium_map,
+            pokemon_entity.lat,
             pokemon_entity.lon,
-            pokemon_entity.pokemon.title_ru,
             request.build_absolute_uri(pokemon_entity.pokemon.image.url),
+            pokemon_info=get_pokemon_info(pokemon_entity)
         )
 
     pokemons = Pokemon.objects.all()
@@ -87,12 +88,23 @@ def show_pokemon(request, pokemon_id):
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in pokemon_entities:
         add_pokemon(
-            folium_map, pokemon_entity.lat,
+            folium_map,
+            pokemon_entity.lat,
             pokemon_entity.lon,
-            pokemon_entity.pokemon.title_ru,
             request.build_absolute_uri(pokemon_entity.pokemon.image.url),
+            pokemon_info=get_pokemon_info(pokemon_entity)
         )
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon_info
     })
+
+
+def get_pokemon_info(pokemon_entity):
+    pokemon_info = f'<b>{pokemon_entity.pokemon.title_ru}</b>\n' \
+                   f'Уровень-<i>{pokemon_entity.level}\n</i>' \
+                   f'Здоровье-<i>{pokemon_entity.health}\n</i>' \
+                   f'Сила-<i>{pokemon_entity.strength}\n</i>' \
+                   f'Защита-<i>{pokemon_entity.defence}\n</i>' \
+                   f'Выносливость-<i>{pokemon_entity.stamina}</i>'
+    return pokemon_info
