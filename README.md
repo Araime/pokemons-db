@@ -1,6 +1,9 @@
 # Карта покемонов
 
-![screenshot](https://dvmn.org/filer/canonical/1563275070/172/)
+<a href="https://ibb.co/7nWhC91"><img src="https://i.ibb.co/fkpJFcx/image.png" alt="image" border="0"></a>  
+
+<a href="https://ibb.co/m9vbpwk"><img src="https://i.ibb.co/qN076fK/2.png" alt="2" border="0"></a>  
+
 
 ### Предметная область
 
