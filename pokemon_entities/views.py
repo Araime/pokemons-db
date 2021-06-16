@@ -1,7 +1,7 @@
 import folium
 from django.shortcuts import render
 from django.http import Http404
-from pokemon_entities.models import Pokemon, PokemonEntity, PokemonElementType
+from pokemon_entities.models import Pokemon, PokemonEntity
 
 
 MOSCOW_CENTER = [55.751244, 37.618423]
