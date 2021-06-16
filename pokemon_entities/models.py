@@ -17,7 +17,7 @@ class Pokemon(models.Model):
     title_jp = models.CharField('название на японском', max_length=200, blank=True)
     image = models.ImageField('изображение', upload_to='pokemons', null=True, blank=True)
     description = models.TextField('описание', blank=True)
-    element_type = models.ManyToManyField(PokemonElementType, verbose_name='типы стихий',
+    element_type = models.ManyToManyField(PokemonElementType, blank=True, verbose_name='типы стихий',
                                           related_name='elements')
     previous_evolution = models.ForeignKey('Pokemon', on_delete=models.SET_NULL, null=True, blank=True,
                                            verbose_name='эволюционировал из', related_name='evolutions')
